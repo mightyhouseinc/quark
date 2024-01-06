@@ -10,10 +10,7 @@ def right(i):
 def heapify(a, i):
     l = left(i)
     r = right(i)
-    if l < len(a) and a[l] < a[i]:
-        smallest = l
-    else:
-        smallest = i
+    smallest = l if l < len(a) and a[l] < a[i] else i
     if r < len(a) and a[r] < a[smallest]:
         smallest = r
     if smallest != i:

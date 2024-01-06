@@ -6,8 +6,7 @@
  
 class Graph():
     def __init__(self, vertices):
-        self.graph = [[0 for column in range(vertices)]\
-                            for row in range(vertices)]
+        self.graph = [[0 for _ in range(vertices)] for _ in range(vertices)]
         self.V = vertices
  
     ''' Check if this vertex is an adjacent vertex 
@@ -18,44 +17,35 @@ class Graph():
         # in path are adjacent
         if self.graph[ path[pos-1] ][v] == 0:
             return False
- 
-        # Check if current vertex not already in path
-        for vertex in path:
-            if vertex == v:
-                return False
- 
-        return True
+
+        return all(vertex != v for vertex in path)
  
     # A recursive utility function to solve 
     # hamiltonian cycle problem
     def hamCycleUtil(self, path, pos):
- 
+     
         # base case: if all vertices are 
         # included in the path
         if pos == self.V:
             # Last vertex must be adjacent to the 
             # first vertex in path to make a cyle
-            if self.graph[ path[pos-1] ][ path[0] ] == 1:
-                return True
-            else:
-                return False
- 
+            return self.graph[ path[pos-1] ][ path[0] ] == 1
         # Try different vertices as a next candidate 
         # in Hamiltonian Cycle. We don't try for 0 as 
         # we included 0 as starting point in in hamCycle()
         for v in range(1,self.V):
- 
+
             if self.isSafe(v, pos, path) == True:
- 
+
                 path[pos] = v
- 
+
                 if self.hamCycleUtil(path, pos+1) == True:
                     return True
- 
+
                 # Remove current vertex if it doesn't 
                 # lead to a solution
                 path[pos] = -1
- 
+
         return False
  
     def hamCycle(self):

@@ -29,7 +29,7 @@ print('Analyzing your password.')
 count = 1
 for regex, msg in check.items():
     mo = regex.search(password)
-    if mo == None:
+    if mo is None:
         print(msg)
         break
     if count == len(check):

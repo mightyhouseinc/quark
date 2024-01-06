@@ -7,7 +7,7 @@
 def coin_change(coins, amount):
 
 	#init the dp table
-	tab = [0 for i in range(amount+1)]
+	tab = [0 for _ in range(amount+1)]
 	tab[0] = 1  #base case
 
 	for j in range(len(coins)):

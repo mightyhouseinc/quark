@@ -5,10 +5,10 @@
 n = int(input("Enter no. of elements: "))
 a = []  # empty list
 
-for i in range(0, n):
+for _ in range(0, n):
     # every number in a new line
     x = int(input("Enter number: "))
     a.append(x)
 
 avg = sum(a) / n
-print("Average of numbers in list: " + str(round(avg, 2)))
+print(f"Average of numbers in list: {str(round(avg, 2))}")

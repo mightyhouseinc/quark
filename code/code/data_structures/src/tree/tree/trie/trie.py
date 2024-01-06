@@ -21,10 +21,10 @@ def insert(root_node, word):
 def search(root_node, search_string):
     node = root_node
     for character in search_string:
-        c = node.children.get(character)
-        if not c:
+        if c := node.children.get(character):
+            node = c
+        else:
             return False
-        node = c
     return True
 
 

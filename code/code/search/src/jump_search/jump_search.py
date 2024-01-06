@@ -7,7 +7,7 @@ def jumpSearch(arr, x):
     left, right = 0, 0
     while left < n and arr[left] <= x:
         right = min(n - 1, left + jump)
-        if arr[left] <= x and arr[right] >= x:
+        if arr[right] >= x:
             break
         left += jump
 

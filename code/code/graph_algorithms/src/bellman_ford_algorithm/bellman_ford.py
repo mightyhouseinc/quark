@@ -25,7 +25,7 @@ class Graph:
 		dist[src] = 0
 
 		# relax all edges |V|-1 times.
-		for i in range(self.V - 1):
+		for _ in range(self.V - 1):
 			# update dist value and parent index of adjacent values of picked vertex.
 			# consider those which are still in queue.
 			for u, v, w in self.graph:

@@ -20,9 +20,7 @@ ELEM_MODE = "ALLOW_DUPLICATE"
 def index(a, x):
     'Locate the leftmost value exactly equal to x'
     i = bisect.bisect_left(a, x)
-    if i != len(a) and a[i] == x:
-        return i
-    return -1
+    return i if i != len(a) and a[i] == x else -1
 
 
 def fill(arr, size):
@@ -41,16 +39,16 @@ def fill(arr, size):
 
 
 def testSizeByTimes(size, times):
-	for t in range(times):
-		arr = []
-		fill(arr, size)
-		for i in range(-30, len(arr) * 2):
-			expect = index(arr, i)
-			actual = search_func(arr, i);
-			if COMPARE_MODE == "ANY_SAME_NODE":
-				assert expect == actual or (expect != -1 and arr[expect] == arr[actual])
-			elif COMPARE_MODE == "LOWER_BOUND":
-				assert expect == actual
+    for _ in range(times):
+        arr = []
+        fill(arr, size)
+        for i in range(-30, len(arr) * 2):
+        	expect = index(arr, i)
+        	actual = search_func(arr, i);
+        	if COMPARE_MODE == "ANY_SAME_NODE":
+        		assert expect == actual or (expect != -1 and arr[expect] == arr[actual])
+        	elif COMPARE_MODE == "LOWER_BOUND":
+        		assert expect == actual
 
 
 testSizeByTimes(0, 1)

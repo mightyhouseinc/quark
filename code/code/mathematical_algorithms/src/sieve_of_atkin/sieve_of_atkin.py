@@ -6,7 +6,7 @@ def atkin_sieve(n):
 # Include 2,3,5 in initial results
     if (n >= 5):
         result = [2, 3, 5]
-    elif (n >= 3 and n < 5):
+    elif n >= 3:
         result = [2, 3]
     elif (n == 2):
         result = [2]

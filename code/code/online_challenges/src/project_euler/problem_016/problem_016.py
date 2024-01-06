@@ -1,6 +1,4 @@
 n = 2**1000
 s = list(str(n))
-ans = 0
-for i in s:
-    ans += int(i)
+ans = sum(int(i) for i in s)
 print(ans)

@@ -1,7 +1,7 @@
 # Part of Cosmos by OpenGenus Foundation
 def bucket_sort(A):
-    buckets = [[] for x in range(10)]
-    for i, x in enumerate(A):
+    buckets = [[] for _ in range(10)]
+    for x in A:
         buckets[int(x * len(buckets))].append(x)
         out = []
         for buck in buckets:

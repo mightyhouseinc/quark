@@ -9,16 +9,12 @@ alphabet = 'abcdefghijklmnopqrstuvwxyz'
 
 def pangrammaticChecker(string):
 	string.lower()
-	counter = 0 
-	for x in alphabet:
-		if (string.find(x)<0):
-			counter += 1
-	if(counter == 0):
-		result = "Pangram"
-	elif(counter == 1):
-		result = "Pangrammatic Lipogram"
+	counter = sum(1 for x in alphabet if (string.find(x)<0))
+	if counter == 0:
+		return "Pangram"
+	elif counter == 1:
+		return "Pangrammatic Lipogram"
 	else:
-		result = "Not a pangram but might a lipogram"
-	return result
+		return "Not a pangram but might a lipogram"
 if __name__ == '__main__':
 	print(pangrammaticChecker("The quick brown fox jumps over the lazy dog"))

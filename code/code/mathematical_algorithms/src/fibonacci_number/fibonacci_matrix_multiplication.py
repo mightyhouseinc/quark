@@ -16,15 +16,15 @@ def power(F, n):
     """
     Transforms matrix F to F^n
     """
-    if n == 0 or n == 1:
+    if n in [0, 1]:
         return
-
-    M = [[1,1],[1,0]]
 
     power(F, n/2)
     multiply(F, F)
 
     if n%2 != 0:
+        M = [[1,1],[1,0]]
+
         multiply(F, M)
 
 def multiply(F, M):

@@ -8,12 +8,12 @@ class Graph:
     def __init__(self,vertices):
         # No. of vertices
         self.V= vertices
- 
+
         # default dictionary to store graph
         self.graph= defaultdict(list)
- 
+
         # To store transitive closure
-        self.tc = [[0 for j in range(self.V)] for i in range(self.V)]
+        self.tc = [[0 for _ in range(self.V)] for _ in range(self.V)]
  
     # function to add an edge to graph
     def addEdge(self,u,v):

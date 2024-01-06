@@ -28,11 +28,8 @@ def shaker_sort(sort_list):
 if __name__ == "__main__":
     count = 20
 
-    source_list = []
     random.seed()
-    for j in range(0, count):
-        source_list.append(random.randint(0, 100))
-
+    source_list = [random.randint(0, 100) for _ in range(0, count)]
     print("Input:", source_list)
     shaker_sort(source_list)
     print("Output:", source_list)

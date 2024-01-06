@@ -10,8 +10,7 @@ def sigmoid(scores):
 
 def log_likelihood(features, target, weights):
     scores = np.dot(features, weights)
-    ll = np.sum(target * scores - np.log(1 + np.exp(scores)))
-    return ll
+    return np.sum(target * scores - np.log(1 + np.exp(scores)))
 
 
 def logistic_regression(features,

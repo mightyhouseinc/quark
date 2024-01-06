@@ -29,7 +29,7 @@ def getZarr(str, Z):
 
 
 def search(text, pattern):
-    concat = pattern + "$" + text
+    concat = f"{pattern}${text}"
     size = len(concat)
     Z = [0] * size
 
@@ -37,7 +37,7 @@ def search(text, pattern):
 
     for i in range(0, size):
         if Z[i] == len(pattern):
-            print("Pattern found at " + str(i - len(pattern)))
+            print(f"Pattern found at {str(i - len(pattern))}")
 
 text = "namanchamanbomanamansanam"
 pattern = "aman"

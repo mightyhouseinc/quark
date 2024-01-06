@@ -30,21 +30,21 @@ def merge(left, right):
 def merge_sort(
         arr
 ):  # this function will return a tuple as (sorted_array, inversion_count)
-    if len(arr) > 1:
-        mid = len(arr) // 2
-        left = arr[:mid]
-        right = arr[mid:]
-
-        left, left_inv_cnt = merge_sort(left)
-        right, right_inv_cnt = merge_sort(right)
-        merged, merged_inv_cnt = merge(left, right)
-        return merged, (left_inv_cnt + right_inv_cnt + merged_inv_cnt)
-    else:
+    if len(arr) <= 1:
         return arr, 0
+    mid = len(arr) // 2
+    left = arr[:mid]
+    right = arr[mid:]
+
+    left, left_inv_cnt = merge_sort(left)
+    right, right_inv_cnt = merge_sort(right)
+    merged, merged_inv_cnt = merge(left, right)
+    return merged, (left_inv_cnt + right_inv_cnt + merged_inv_cnt)
 
 
 arr = [1, 8, 3, 4, 9, 3]
 sorted_array, inversion_count = merge_sort(arr)
 
-print("Sorted array:", sorted_array,
-      " and Inversion count = %s" % inversion_count)
+print(
+    "Sorted array:", sorted_array, f" and Inversion count = {inversion_count}"
+)

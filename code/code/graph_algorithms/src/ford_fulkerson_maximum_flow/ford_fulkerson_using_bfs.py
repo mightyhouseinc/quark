@@ -16,23 +16,21 @@ class Graph:
     '''Returns true if there is a path from source 's' to sink 't' in
     residual graph. Also fills parent[] to store the path '''
     def BFS(self,s, t, parent):
- 
+     
         # Mark all the vertices as not visited
         visited =[False]*(self.ROW)
-         
+
         # Create a queue for BFS
-        queue=[]
-         
-        # Mark the source node as visited and enqueue it
-        queue.append(s)
+        queue = [s]
+
         visited[s] = True
-         
+
         # Standard BFS Loop
         while queue:
- 
+
             #Dequeue a vertex from queue and print it
             u = queue.pop(0)
-         
+
             # Get all adjacent vertices of the dequeued vertex u
             # If a adjacent has not been visited, then mark it
             # visited and enqueue it
@@ -41,10 +39,10 @@ class Graph:
                     queue.append(ind)
                     visited[ind] = True
                     parent[ind] = u
- 
+
         # If we reached sink in BFS starting from source, then return
         # true, else false
-        return True if visited[t] else False
+        return bool(visited[t])
              
      
     # Returns tne maximum flow from s to t in the given graph
@@ -90,7 +88,7 @@ matrix = []
 for i in range(0,m):
     matrix.append([])
     for j in range(0,m):
-        print("Enter the edge value from " + str(i) + " to " + str(j) +": ", end="")
+        print(f"Enter the edge value from {str(i)} to {str(j)}: ", end="")
         temp = int(input())
         matrix[i].append(temp)
 print("\nthe matrix is,\n")
@@ -102,5 +100,5 @@ print("Enter the source: ", end="")
 source = int(input())
 print("Enter the sink: ", end="")
 sink = int(input())
-  
+
 print ("The maximum possible flow is %d " % g.FordFulkerson(source, sink))

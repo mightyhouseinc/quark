@@ -4,9 +4,9 @@ import random
 def poblacion_inicial(max_poblacion, num_vars):
 	# Crear poblacion inicial aleatoria
 	poblacion = []
-	for i in range(max_poblacion):
+	for _ in range(max_poblacion):
 		gen = []
-		for j in range(num_vars):
+		for _ in range(num_vars):
 			if random.random() > 0.5:
 				gen.append(1)
 			else:
@@ -34,11 +34,7 @@ def adaptacion_3sat(gen, solucion):
 	return cont
 
 def evalua_poblacion(poblacion, solucion):
-	# evalua todos los genes de la poblacion
-	adaptacion = []
-	for i in range(len(poblacion)):
-		adaptacion.append(adaptacion_3sat(poblacion[i], solucion))
-	return adaptacion
+	return [adaptacion_3sat(poblacion[i], solucion) for i in range(len(poblacion))]
 
 def seleccion(poblacion, solucion):
 	adaptacion = evalua_poblacion(poblacion, solucion)
@@ -68,9 +64,9 @@ def cruce(gen1, gen2):
 	nuevo_gen1 = []
 	nuevo_gen2 = []
 	corte = random.randint(0, len(gen1))
-	nuevo_gen1[0:corte] = gen1[0:corte]
+	nuevo_gen1[:corte] = gen1[:corte]
 	nuevo_gen1[corte:] = gen2[corte:]
-	nuevo_gen2[0:corte] = gen2[0:corte]
+	nuevo_gen2[:corte] = gen2[:corte]
 	nuevo_gen2[corte:] = gen1[corte:]
 	return nuevo_gen1, nuevo_gen2
 
@@ -78,10 +74,7 @@ def mutacion(prob, gen):
 	# muta un gen con una probabilidad prob
 	if random.random < prob:
 		cromosoma = random.randint(0, len(gen))
-		if gen[cromosoma] == 0:
-			gen[cromosoma] = 1
-		else:
-			gen[cromosoma] = 0
+		gen[cromosoma] = 1 if gen[cromosoma] == 0 else 0
 	return gen
 
 def elimina_peores_genes(poblacion, solucion):

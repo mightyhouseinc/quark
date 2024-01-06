@@ -15,7 +15,7 @@ class Activity:
         return self.finish < other.finish
 
     def __repr__(self):
-        return "( %s, %s )" % (self.start, self.finish)
+        return f"( {self.start}, {self.finish} )"
 
 
 def activity_selection(activity_arr):

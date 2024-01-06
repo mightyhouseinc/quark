@@ -2,12 +2,10 @@
 
 keys=list(map(int,input("Enter the list of keys").split()))
 freq=list(map(int,input("Enter the list of frequencies").split()))
-z=[]
 n=len(keys)
-for i in range(n):
-    z+=[[keys[i],freq[i]]]
+z = [[keys[i],freq[i]] for i in range(n)]
 z.sort()
-cost=[[10**18 for i in range(n)] for j in range(n)] #initialising with infinity
+cost = [[10**18 for _ in range(n)] for _ in range(n)]
 for i in range(n):
     keys[i]=z[i][0]
     freq[i]=z[i][1]
@@ -27,7 +25,7 @@ for i in range(2,n+1):
                 cost[l][r]=min(cost[l][r],cost[l][r-1])
             else:
                 cost[l][r]=min(cost[l][r],cost[l][k]+cost[k+1][r])
-                
+
         cost[l][r]+=s[r]-s[l]+freq[l]
-        
+
 print ("Cost of Optimal BST is : ",cost[0][n-1])

@@ -28,7 +28,7 @@ def primsMSTAlgorithm(adjList):
 
 	source = list(adjList.keys())[0]  # Chooses an arbitrary vertex as the starting point of the algorithm
 	# unexplored: a heap with elements of the following format (minWeight, destinationVertex, edgeID)
-	unexplored, explored, mst = Heap(), set([source]), set()
+	unexplored, explored, mst = Heap(), {source}, set()
 	updateHeap(source)
 
 	while unexplored.length():
@@ -36,7 +36,7 @@ def primsMSTAlgorithm(adjList):
 		explored.add(vertex)
 		mst.add(edgeID)
 		updateHeap(vertex)
-	
+
 	return mst
 
 
@@ -60,20 +60,16 @@ def graph(filename):
 	with open(filename, 'r') as f:
 		numbers = f.readline().split()
 		numVertices, numEdges = int(numbers[0]), int(numbers[1])
-		edgeID = 1
-
-		for line in f:
+		for edgeID, line in enumerate(f, start=1):
 			edge = line.split()
 			vertex1, vertex2, weight = int(edge[0]), int(edge[1]), int(edge[2])
-			
+
 			if vertex1 in adjList: adjList[vertex1].append((vertex2,weight,edgeID))
 			else: adjList[vertex1] = [(vertex2,weight,edgeID)]
 			if vertex2 in adjList: adjList[vertex2].append((vertex1,weight,edgeID))
 			else: adjList[vertex2] = [(vertex1,weight,edgeID)]
-			
+
 			edgeList[edgeID] = (vertex1,vertex2,weight)
-			
-			edgeID += 1
 
 	return adjList, edgeList
 
@@ -87,8 +83,5 @@ if __name__ == "__main__":
 
 	mst = primsMSTAlgorithm(adjList)
 
-	cost = 0
-	# Computes the sum of the weights of all edges in the MST
-	for edgeID in mst:
-		cost += edgeList[edgeID][2]
+	cost = sum(edgeList[edgeID][2] for edgeID in mst)
 	print(cost)

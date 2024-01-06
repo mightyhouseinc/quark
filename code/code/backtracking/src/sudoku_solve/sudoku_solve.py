@@ -28,18 +28,12 @@ def find_empty_location(arr,l):
 # Returns a boolean which indicates whether any assigned entry
 # in the specified row matches the given number.
 def used_in_row(arr,row,num):
-    for i in range(9):
-        if(arr[row][i] == num):
-            return True
-    return False
+    return any((arr[row][i] == num) for i in range(9))
  
 # Returns a boolean which indicates whether any assigned entry
 # in the specified column matches the given number.
 def used_in_col(arr,col,num):
-    for i in range(9):
-        if(arr[i][col] == num):
-            return True
-    return False
+    return any((arr[i][col] == num) for i in range(9))
  
 # Returns a boolean which indicates whether any assigned entry
 # within the specified 3x3 box matches the given number

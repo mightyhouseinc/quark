@@ -53,7 +53,7 @@ class SegmentTree:
         left = 2 * node + 1  # left child index
         right = 2 * node + 2  # right child index
 
-        if i <= idx and idx <= mid:
+        if i <= idx <= mid:
             # update in left child
             self.updateHelper(left, i, mid, idx, val)
         else:

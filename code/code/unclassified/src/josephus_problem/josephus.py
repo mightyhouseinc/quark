@@ -1,7 +1,5 @@
 def safePos(n, k):
-    if n == 1:
-        return 0
-    return (safePos(n - 1, k) + k) % n
+    return 0 if n == 1 else (safePos(n - 1, k) + k) % n
 
 
 n = int(input("Enter the number of people : "))

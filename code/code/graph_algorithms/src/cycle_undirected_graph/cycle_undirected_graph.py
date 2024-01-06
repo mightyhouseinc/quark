@@ -38,7 +38,7 @@ def is_cyclic_graph(G):
         Q.append(v)
 
         # as long as Q is not empty
-        while len(Q) > 0:
+        while Q:
 
             # get the next vertex u of Q that must be looked at
             u = Q.pop(0)

@@ -69,4 +69,4 @@ if __name__ == '__main__':
     new_string = cipher(args.string.lower())
 
     # print translated answer
-    print("Your translated string is: " + new_string)
+    print(f"Your translated string is: {new_string}")

@@ -2,11 +2,7 @@ def catalanNum(n):
     if n <=1 :
         return 1
 
-    result = 0
-    for i in range(n):
-        result += catalanNum(i) * catalanNum(n-i-1)
-
-    return result
+    return sum(catalanNum(i) * catalanNum(n-i-1) for i in range(n))
  
 for i in range(15):
     print catalanNum(i)

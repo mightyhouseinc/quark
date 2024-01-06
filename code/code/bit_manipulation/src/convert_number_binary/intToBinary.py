@@ -6,10 +6,7 @@ def intToBinary(i):
 	if i == 0: return "0"
 	s = ''
 	while i:
-		if i % 2 == 1:
-			s = "1" + s
-		else: 
-			s = "0" + s
+		s = f"1{s}" if i % 2 == 1 else f"0{s}"
 		i /= 2
 	return s
 

@@ -8,7 +8,7 @@ class Job:
 
 def job_scheduling(jobs):
     jobs = sorted(jobs, key=lambda job: job.profit)
-    max_deadline = max([job.deadline for job in jobs])
+    max_deadline = max(job.deadline for job in jobs)
     scheduling = [jobs.pop()]
     while len(jobs) != 0 and len(scheduling) < max_deadline:
         new_job = jobs.pop()

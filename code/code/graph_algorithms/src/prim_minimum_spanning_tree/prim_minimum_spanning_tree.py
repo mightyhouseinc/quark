@@ -5,8 +5,7 @@ class Python():
  
     def __init__(self, vertices):
         self.V = vertices
-        self.graph = [[0 for column in range(vertices)] 
-                      for row in range(vertices)]
+        self.graph = [[0 for _ in range(vertices)] for _ in range(vertices)]
  
     # Function to print the constructed MST stored in parent[]
     def printMST(self, parent):
@@ -31,24 +30,23 @@ class Python():
     # Function to construct and print MST for a graph represented using
     # adjacency matrix representation
     def primMST(self):
- 
+     
         #Key values used to pick minimum weight edge in cut
         key = [1000000] * self.V
         parent = [None] * self.V # Array to store constructed MST
         key[0] = 0   # Make key 0 so that this vertex is picked as first vertex
         mstSet = [False] * self.V
- 
+
         parent[0] = -1  # First node is always the root of
- 
-        for cout in range(self.V):
- 
+
+        for _ in range(self.V):
             # Pick the minimum distance vertex from the set of vertices not
             # yet processed. u is always equal to src in first iteration
             u = self.minKey(key, mstSet)
- 
+
             # Put the minimum distance vertex in the shortest path tree
             mstSet[u] = True
- 
+
             # Update dist value of the adjacent vertices of the picked vertex
             # only if the current distance is greater than new distance and
             # the vertex in not in the shotest path tree
@@ -59,7 +57,7 @@ class Python():
                 if self.graph[u][v] > 0 and mstSet[v] == False and key[v] > self.graph[u][v]:
                         key[v] = self.graph[u][v]
                         parent[v] = u
- 
+
         self.printMST(parent)
  
 g  = Python(5)

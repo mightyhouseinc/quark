@@ -19,17 +19,13 @@ def replace_0_5_pythonic(user_input):
 # ----------------------
 try:  # for python 2.x
     user_input = raw_input("Enter the number: ")
-    pass
 except NameError:  # for python 3.x
     user_input = input('Enter the number: ')
-    pass
-
-
 print("\n----- Iterative Approach -----")
 new_str = replace_0_5_iterative(user_input)
-print("Modified number: " + new_str)
+print(f"Modified number: {new_str}")
 
 print("\n----- Python Replace Approach -----")
 new_str = replace_0_5_pythonic(user_input)
-print("Modified number: " + new_str)
+print(f"Modified number: {new_str}")
 

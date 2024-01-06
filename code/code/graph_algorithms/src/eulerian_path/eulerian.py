@@ -27,46 +27,37 @@ class Graph:
                 self.DFSUtil(i,visited)
   
     def isConnected(self):
-  
+      
         # Mark all the vertices as not visited
         visited =[False]*(self.V)
- 
+
         #  Find a vertex with non-zero degree
         for i in range(self.V):
             if len(self.graph[i]) > 1:
                 break
- 
+
         # If there are no edges in the graph, return true
         if i == self.V-1:
             return True
- 
+
         # Start DFS traversal from a vertex with non-zero degree
         self.DFSUtil(i,visited)
- 
-        # Check if all non-zero degree vertices are visited
-        for i in range(self.V):
-            if visited[i]==False and len(self.graph[i]) > 0:
-                return False
-         
-        return True
+
+        return not any(
+            visited[i] == False and len(self.graph[i]) > 0 for i in range(self.V)
+        )
  
  
     def isEulerian(self):
-        # Check if all non-zero degree vertices are connected
         if self.isConnected() == False:
             return 0
-        else:
-            #Count vertices with odd degree
-            odd = 0
-            for i in range(self.V):
-                if len(self.graph[i]) % 2 !=0:
-                    odd +=1
-            if odd == 0:
-                return 2
-            elif odd == 2:
-                return 1
-            elif odd > 2:
-                return 0
+        odd = sum(1 for i in range(self.V) if len(self.graph[i]) % 2 !=0)
+        if odd == 0:
+            return 2
+        elif odd == 2:
+            return 1
+        elif odd > 2:
+            return 0
  
  
     # Function to run test cases

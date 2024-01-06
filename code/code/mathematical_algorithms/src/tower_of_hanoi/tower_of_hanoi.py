@@ -13,4 +13,4 @@ def TowerOfHanoi(disks , A, B, C):
 # Driver code
 n = input("Enter the number of disks- ")
 TowerOfHanoi(n, 'A', 'C', 'B')
-print("Total moves required = " + str(moves))
+print(f"Total moves required = {str(moves)}")

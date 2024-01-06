@@ -2,10 +2,7 @@
 
 #shortest common supersequence using dp
 def min(a,b):
-	if(a>b):
-		return b
-	else:
-		return a
+	return min(a, b)
 def superSeq( X ,  Y , m , n):
 	dp=[]
 	for i in range(m+1):

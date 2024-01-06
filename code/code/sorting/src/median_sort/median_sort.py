@@ -6,9 +6,8 @@ def median_sort(list):
         return None
     if n % 2 == 1:
         return data[n // 2]
-    else:
-        i = n // 2
-        return (data[i - 1] + data[i]) / 2
+    i = n // 2
+    return (data[i - 1] + data[i]) / 2
 
 
 #list = [0,2,3,4,5,6,7,8,9]

@@ -28,18 +28,17 @@ def decompress(compressed):
     dict_size = 256 #ASCII characters
     dictionary = {i: chr(i) for i in range(dict_size)}
 
-    result = ""
     buffer = chr(compressed.pop(0))
-    result += buffer
+    result = f"{buffer}"
     for ch in compressed:
         if ch in dictionary:
             entry = dictionary[ch]
         elif ch == dict_size:
             entry = ch + ch[0]
         else:
-            raise ValueError("Bad Compression for %s" %ch)
+            raise ValueError(f"Bad Compression for {ch}")
         result += entry
-    
+
         dictionary[dict_size] = buffer = entry[0]
         dict_size += 1
 

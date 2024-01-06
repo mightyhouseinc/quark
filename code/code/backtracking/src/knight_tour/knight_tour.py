@@ -13,20 +13,20 @@ def chess2index(chess, boardsize=boardsize):
  
 def boardstring(board, boardsize=boardsize):
     r = range(boardsize)
-    lines = ''
-    for y in r:
-        lines += '\n' + ','.join('%2i' % board[(x,y)] if board[(x,y)] else '  '
-                                 for x in r)
-    return lines
+    return ''.join(
+        '\n'
+        + ','.join('%2i' % board[(x, y)] if board[(x, y)] else '  ' for x in r)
+        for y in r
+    )
  
 def knightmoves(board, P, boardsize=boardsize):
     Px, Py = P
-    kmoves = set((Px+x, Py+y) for x,y in _kmoves)
-    kmoves = set( (x,y)
-                  for x,y in kmoves
-                  if 0 <= x < boardsize
-                     and 0 <= y < boardsize
-                     and not board[(x,y)] )
+    kmoves = {(Px+x, Py+y) for x,y in _kmoves}
+    kmoves = {
+        (x, y)
+        for x, y in kmoves
+        if 0 <= x < boardsize and 0 <= y < boardsize and not board[(x, y)]
+    }
     return kmoves
  
 def accessibility(board, P, boardsize=boardsize):

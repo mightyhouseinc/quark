@@ -38,4 +38,4 @@ if __name__ == "__main__":
 
 	res,m = g.color_greedy()
 
-	print("max colors: {} list: {}".format(m,res))
+	print(f"max colors: {m} list: {res}")

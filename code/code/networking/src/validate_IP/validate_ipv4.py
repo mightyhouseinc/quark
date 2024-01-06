@@ -5,10 +5,7 @@ def validate_ipv4(ip_addr):
     if len(ip_components) != 4:
         return False
     else:
-        for component in ip_components:
-            if int(component) not in range(0, 255):
-                return False
-        return True
+        return all(int(component) in range(0, 255) for component in ip_components)
 
 
 if __name__ == '__main__':

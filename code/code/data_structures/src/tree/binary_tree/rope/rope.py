@@ -1,10 +1,7 @@
 class node:
     def __init__(self, data=None):
         self.data = data
-        if not data:
-            self.weight = 0
-        else:
-            self.weight = len(data)
+        self.weight = 0 if not data else len(data)
         self.left = None
         self.right = None
         self.parent = None
@@ -12,8 +9,8 @@ class node:
     def size(self):
         if self.data:
             return len(self.data)
-        tmp = self.weight
         if self.right:
+            tmp = self.weight
             return tmp + self.right.size()
 
     def addChild(self, side, node):
@@ -52,10 +49,7 @@ class node:
 
 class Rope:
     def __init__(self, text=None):
-        if text:
-            self.head = node(text)
-        else:
-            self.head = node()
+        self.head = node(text) if text else node()
 
     def Index(self, ind, node=self.head):
         if node.weight <= ind:
@@ -74,7 +68,7 @@ class Rope:
     def split(self, ind):
         result = Rope()
         tmp = self.head
-        splitOff = list()
+        splitOff = []
         #Lookup the node with the index
         while True:
             if tmp.weight <= ind and tmp.right:
@@ -95,13 +89,11 @@ class Rope:
                 tmp = tmp.parent
                 tmp.removeChild("left")
                 tmp.addChild("left", nodeParent)
-                tmp = nodeParent.right
             else:
                 tmp = tmp.parent
                 tmp.removeChild("right")
                 tmp.addChild("right", nodeParent)
-                tmp = nodeParent.right
-
+            tmp = nodeParent.right
         #Get everything else to the right of ind
         first = True
         while tmp.parent:
@@ -119,7 +111,7 @@ class Rope:
 
         #Make a rope with the content right of ind to return
         rightRope = rope()
-        while len(splitOff) > 0:
+        while splitOff:
             rightRope.insert(0, splitOff.pop(0))
         return rightRope
 

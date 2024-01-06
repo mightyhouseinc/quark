@@ -9,7 +9,14 @@ def solve_tsp_dynamic(points):
         B = {}
         for S in [frozenset(C) | {0} for C in itertools.combinations(range(1, cnt), m)]:
             for j in S - {0}:
-                B[(S, j)] = min( [(A[(S-{j},k)][0] + all_distances[k][j], A[(S-{j},k)][1] + [j]) for k in S if k != 0 and k!=j])  #this will use 0th index of tuple for ordering, the same as if key=itemgetter(0) used
+                B[(S, j)] = min(
+                    (
+                        A[(S - {j}, k)][0] + all_distances[k][j],
+                        A[(S - {j}, k)][1] + [j],
+                    )
+                    for k in S
+                    if k not in [0, j]
+                )
         A = B
-    res = min([(A[d][0] + all_distances[0][d[1]], A[d][1]) for d in iter(A)])
+    res = min((A[d][0] + all_distances[0][d[1]], A[d][1]) for d in iter(A))
     return res[1]

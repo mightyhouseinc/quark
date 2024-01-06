@@ -1,7 +1,7 @@
 # Part of Cosmos by OpenGenus Foundation
 
 def binomialCoeff(n, k):
-    C = [0 for i in range(k + 1)]
+    C = [0 for _ in range(k + 1)]
     C[0] = 1
     for i in range(1, n + 1):
         j = min(i, k)

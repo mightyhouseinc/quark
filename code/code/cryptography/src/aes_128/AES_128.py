@@ -231,10 +231,7 @@ def rotWord(rw):
 # subWord
 # The key schedule uses Rijndael's S-box.
 def subWord(rw):
-	ret = []
-	for i in rw:
-		ret.append(getsBox(i))
-	return ret
+	return [getsBox(i) for i in rw]
 
 # rcon
 # Rcon is what the Rijndael documentation calls the exponentiation of 2 to a user-specified value.
@@ -278,64 +275,63 @@ def keyGen(keymt):
 #         all the steps of this process
 # output: matrix containing clear message in hexadecimal ASCII
 def decypher(ct, ky, process=False):
-    if process:
-        print("decipher process:")
-    c1 = ct.replace(" ", "")
-    k1 = ky.replace(" ", "")
-    keymatrix = [[int(k1[0]+k1[1], 16), int(k1[8]+k1[9], 16), int(k1[16]+k1[17], 16), int(k1[24]+k1[25], 16)],
-				 [int(k1[2]+k1[3], 16), int(k1[10]+k1[11], 16), int(k1[18]+k1[19], 16), int(k1[26]+k1[27], 16)],
-				 [int(k1[4]+k1[5], 16), int(k1[12]+k1[13], 16), int(k1[20]+k1[21], 16), int(k1[28]+k1[29], 16)],
-				 [int(k1[6]+k1[7], 16), int(k1[14]+k1[15], 16), int(k1[22]+k1[23], 16), int(k1[30]+k1[31], 16)]]
-    stamatrix = [[int(c1[0]+c1[1], 16), int(c1[8]+c1[9], 16), int(c1[16]+c1[17], 16), int(c1[24]+c1[25], 16)],
-				 [int(c1[2]+c1[3], 16), int(c1[10]+c1[11], 16), int(c1[18]+c1[19], 16), int(c1[26]+c1[27], 16)],
-				 [int(c1[4]+c1[5], 16), int(c1[12]+c1[13], 16), int(c1[20]+c1[21], 16), int(c1[28]+c1[29], 16)],
-				 [int(c1[6]+c1[7], 16), int(c1[14]+c1[15], 16), int(c1[22]+c1[23], 16), int(c1[30]+c1[31], 16)]]
-    rkeys = keyGen(keymatrix)
-    if process:
-        print("\n====first Stage====")
-        print("keys (10)")
-        printMatrix(rkeys[10])
-        print("Add round key (10)")
-        state = addRoundKey(stamatrix, rkeys[10])
-        printMatrix(state)
-        print("Inverse Shift Rows")
-        state = invShiftRows(state)
-        printMatrix(state)
-        print("Inverse Sub Bytes")
-        state = invSubBytes(state)
-        printMatrix(state)
-        print("\n====Second Stage====")
-    else:
-        state = invSubBytes(invShiftRows(addRoundKey(stamatrix, rkeys[10])))
-    for i in range(9, 0, -1):
-        if process:
-            print("keys ("+str(i)+")")
-            printMatrix(rkeys[i])
-            print("Add round key ("+str(i)+")")
-            state = addRoundKey(state, rkeys[i])
-            printMatrix(state)
-            print("Inverse Mix Columns")
-            state = InvMixColumns(state)
-            printMatrix(state)
-            print("Inverse Shift Rows")
-            state = invShiftRows(state)
-            printMatrix(state)
-            print("Inverse Sub Bytes")
-            state = invSubBytes(state)
-            printMatrix(state)
-        else:
-            state = invSubBytes(invShiftRows(InvMixColumns(addRoundKey(state, rkeys[i]))))
-    if process:
-        print("====Third Stage====")
-        print("keys (0")
-        printMatrix(rkeys[0])
-        print("Add round key (0)")
-        state = addRoundKey(state, rkeys[0])
-        printMatrix(state)
-        print("====Result====")
-        return state
-    else:
-        return addRoundKey(state, rkeys[0])
+	if process:
+	    print("decipher process:")
+	c1 = ct.replace(" ", "")
+	k1 = ky.replace(" ", "")
+	keymatrix = [[int(k1[0]+k1[1], 16), int(k1[8]+k1[9], 16), int(k1[16]+k1[17], 16), int(k1[24]+k1[25], 16)],
+	[int(k1[2]+k1[3], 16), int(k1[10]+k1[11], 16), int(k1[18]+k1[19], 16), int(k1[26]+k1[27], 16)],
+	[int(k1[4]+k1[5], 16), int(k1[12]+k1[13], 16), int(k1[20]+k1[21], 16), int(k1[28]+k1[29], 16)],
+	[int(k1[6]+k1[7], 16), int(k1[14]+k1[15], 16), int(k1[22]+k1[23], 16), int(k1[30]+k1[31], 16)]]
+	stamatrix = [[int(c1[0]+c1[1], 16), int(c1[8]+c1[9], 16), int(c1[16]+c1[17], 16), int(c1[24]+c1[25], 16)],
+	[int(c1[2]+c1[3], 16), int(c1[10]+c1[11], 16), int(c1[18]+c1[19], 16), int(c1[26]+c1[27], 16)],
+	[int(c1[4]+c1[5], 16), int(c1[12]+c1[13], 16), int(c1[20]+c1[21], 16), int(c1[28]+c1[29], 16)],
+	[int(c1[6]+c1[7], 16), int(c1[14]+c1[15], 16), int(c1[22]+c1[23], 16), int(c1[30]+c1[31], 16)]]
+	rkeys = keyGen(keymatrix)
+	if process:
+	    print("\n====first Stage====")
+	    print("keys (10)")
+	    printMatrix(rkeys[10])
+	    print("Add round key (10)")
+	    state = addRoundKey(stamatrix, rkeys[10])
+	    printMatrix(state)
+	    print("Inverse Shift Rows")
+	    state = invShiftRows(state)
+	    printMatrix(state)
+	    print("Inverse Sub Bytes")
+	    state = invSubBytes(state)
+	    printMatrix(state)
+	    print("\n====Second Stage====")
+	else:
+	    state = invSubBytes(invShiftRows(addRoundKey(stamatrix, rkeys[10])))
+	for i in range(9, 0, -1):
+		if process:
+			print(f"keys ({str(i)})")
+			printMatrix(rkeys[i])
+			print(f"Add round key ({str(i)})")
+			state = addRoundKey(state, rkeys[i])
+			printMatrix(state)
+			print("Inverse Mix Columns")
+			state = InvMixColumns(state)
+			printMatrix(state)
+			print("Inverse Shift Rows")
+			state = invShiftRows(state)
+			printMatrix(state)
+			print("Inverse Sub Bytes")
+			state = invSubBytes(state)
+			printMatrix(state)
+		else:
+			state = invSubBytes(invShiftRows(InvMixColumns(addRoundKey(state, rkeys[i]))))
+	if not process:
+		return addRoundKey(state, rkeys[0])
+	print("====Third Stage====")
+	print("keys (0")
+	printMatrix(rkeys[0])
+	print("Add round key (0)")
+	state = addRoundKey(state, rkeys[0])
+	printMatrix(state)
+	print("====Result====")
+	return state
 
 # cypher
 # inputs: clear text message as an ASCII hexadecimal 128-bit string
@@ -379,30 +375,29 @@ def cypher(mt, ky, process=False):
 			print("Mix Columns")
 			state = mixColumns(state)
 			printMatrix(state)
-			print("keys ("+str(i)+")")
+			print(f"keys ({str(i)})")
 			printMatrix(rkeys[i])
-			print("add round key ("+str(i)+")")
+			print(f"add round key ({str(i)})")
 			state = addRoundKey(state, rkeys[i])
 			printMatrix(state)
 		else:
 			state = addRoundKey(mixColumns(shiftRows(subBytes(state))), rkeys[i])
-	if process:
-		print("\n====third Stage====")
-		print("Sub Bytes")
-		state = subBytes(state)
-		printMatrix(state)
-		print("Shift Rows")
-		state = shiftRows(state)
-		printMatrix(state)
-		print("keys (10)")
-		printMatrix(rkeys[10])
-		print("add round key (10)")
-		state = addRoundKey(state, rkeys[10])
-		printMatrix(state)
-		print("====Result====")
-		return transpose(zip(*state))
-	else:
+	if not process:
 		return transpose(addRoundKey(shiftRows(subBytes(state)), rkeys[10]))
+	print("\n====third Stage====")
+	print("Sub Bytes")
+	state = subBytes(state)
+	printMatrix(state)
+	print("Shift Rows")
+	state = shiftRows(state)
+	printMatrix(state)
+	print("keys (10)")
+	printMatrix(rkeys[10])
+	print("add round key (10)")
+	state = addRoundKey(state, rkeys[10])
+	printMatrix(state)
+	print("====Result====")
+	return transpose(zip(*state))
 #===============================================================================
 
 # multi block text cypher and decypher =========================================
@@ -413,14 +408,13 @@ def cypher(mt, ky, process=False):
 #         all the steps of this process
 # output: cypher text as an hexadecimal string
 def encryption(message, key, process=False):
-    # split the array in 16 bit chunks
-    messageArray = hexStringChunks(message.strip())
-    # now encrypt the message and store it in a result matrix
-    cyphertextArray = list()
-    for msg in messageArray:
-        cyphertextArray.append(matrixToLinearString(cypher(msg, key, process)))
-    # return a string containing an hexadecimal cyphertext
-    return ''.join(cyphertextArray)
+	# split the array in 16 bit chunks
+	messageArray = hexStringChunks(message.strip())
+	cyphertextArray = [
+		matrixToLinearString(cypher(msg, key, process)) for msg in messageArray
+	]
+	# return a string containing an hexadecimal cyphertext
+	return ''.join(cyphertextArray)
 
 # decryption
 # inputs: cypher text and 128-bit key (as hex string)
@@ -428,17 +422,16 @@ def encryption(message, key, process=False):
 #         all the steps of this process
 # output: clear text as string
 def decryption(cyphertext, key, process=False):
-    # split the array in 16 bit ckunks
-    # and unhandled error should appear if the text given is not a cyphertext
-    # not during this step but while the actual decypher is ocurring
-    cyphertextArray = stringChunks(cyphertext.replace(" ", ""))
-    # get the cleartext and store it in a result matrix
-    messageArray = list()
-    for ct in cyphertextArray:
-        messageArray.append(matrixToText(decypher(ct, key, process)))
-    # return the message, as we fill the last matrix with spaces to have full
-    # 128 bit blocks, strip the string before returning it
-    return (''.join(messageArray)).strip()
+	# split the array in 16 bit ckunks
+	# and unhandled error should appear if the text given is not a cyphertext
+	# not during this step but while the actual decypher is ocurring
+	cyphertextArray = stringChunks(cyphertext.replace(" ", ""))
+	messageArray = [
+		matrixToText(decypher(ct, key, process)) for ct in cyphertextArray
+	]
+	# return the message, as we fill the last matrix with spaces to have full
+	# 128 bit blocks, strip the string before returning it
+	return (''.join(messageArray)).strip()
 
 #===============================================================================
 

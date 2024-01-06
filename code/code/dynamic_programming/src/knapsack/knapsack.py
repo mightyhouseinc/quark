@@ -7,7 +7,7 @@ def knapsack(weights, values, W):
 
 	n = len(weights)
 	# create 2d DP table with zeros to store intermediate values
-	tab = [[0 for i in range(W+1)] for j in range(n+1)]
+	tab = [[0 for _ in range(W+1)] for _ in range(n+1)]
 
 	# no further init required as enitre table is already inited
 

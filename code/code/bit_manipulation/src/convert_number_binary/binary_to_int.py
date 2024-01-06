@@ -23,5 +23,6 @@ def binary_to_int(binary_input):
 #test
 
 sample_binary_input = '01111101'
-print('Integer value of '  + sample_binary_input +
-      ' is ' + str(binary_to_int(sample_binary_input)))
+print(
+    f'Integer value of {sample_binary_input} is {str(binary_to_int(sample_binary_input))}'
+)

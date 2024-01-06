@@ -6,8 +6,8 @@
 # and '&', '|' and '^' as the operators
 
 def boolean_parenthesization(c,o,n):
-    t = [[0 for i in xrange(n)] for j in xrange(n)]
-    f = [[0 for i in xrange(n)] for j in xrange(n)]
+    t = [[0 for _ in xrange(n)] for _ in xrange(n)]
+    f = [[0 for _ in xrange(n)] for _ in xrange(n)]
 
     for i in xrange(n):
         if (c[i]=='T'):

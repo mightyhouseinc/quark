@@ -27,10 +27,9 @@ class bloomFilter:
         Determine whether a value is present. A false positive might be returned even if the element is
         not present. However, a false negative will never be returned.
         """
-        for hf in self.hashFunctions:
-            if self.bits & 1 << hf(value, self.M) == 0:
-                return False
-        return True
+        return all(
+            self.bits & 1 << hf(value, self.M) != 0 for hf in self.hashFunctions
+        )
 
 
 # Example of usage

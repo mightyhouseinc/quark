@@ -1,8 +1,8 @@
 from random import random
 
 # sets and datas
-sets = [random() for i in range(10)]
-data = [random() for i in range(1000)]
+sets = [random() for _ in range(10)]
+data = [random() for _ in range(1000)]
 
 parameter = 0.01  # This parameter change the mean changing speed must be Min: 0 Max: 1
 

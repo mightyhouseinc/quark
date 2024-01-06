@@ -37,10 +37,11 @@ morseAlphabet = {
     "0": "-----"
 }
 
-inverseAlphabet = reduce(lambda a, b: dict(a.items() + b.items()),
-                         [{
-                             morseAlphabet[k]: k
-                         } for k in morseAlphabet.keys()], {})
+inverseAlphabet = reduce(
+    lambda a, b: dict(a.items() + b.items()),
+    [{morseAlphabet[k]: k} for k in morseAlphabet],
+    {},
+)
 
 
 def encode(_text):

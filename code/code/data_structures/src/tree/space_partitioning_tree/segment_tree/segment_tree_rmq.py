@@ -19,12 +19,12 @@ def query(tree,l,r,x,y,node):
     if(l==x and r==y):
         return tree[node]
     mid = l+ (r-l)//2
-    
-    if(x<=mid and y<=mid):
+
+    if (x<=mid and y<=mid):
         return query(tree,l,mid,x,y,(2*node)+1)
     elif(x>mid and y>mid):
         return query(tree,mid+1,r,x,y,(2*node)+2)
-    elif(x<=mid and y>mid):
+    elif x <= mid:
         left = query(tree,l,mid,x,mid,(2*node)+1)
         right = query(tree,mid+1,r,mid+1,y,(2*node)+2)
         return min(left,right)
@@ -46,17 +46,17 @@ print("Input elements of the array : ")
 arr = list(map(int,input().split(" ")))
 x = math.ceil(math.log(n,2))
 totnodes = (2*(2**(x+1)))-1
-tree = [None for i in range(totnodes)]
+tree = [None for _ in range(totnodes)]
 buildtree(tree,0,n-1,arr,0)
-for i in range(que):
+for _ in range(que):
     print("If you want to find query press 'q' with left and right index.")
     print("If you want to update the array, press 'u' with index and value for the update.")
     q,x,y = input().split(" ")
     x = int(x)-1
     y = int(y)-1
-    if(q=="q"):
-        print("Minimum in the given range is " + str(query(tree,0,n-1,x,y,0)));
-    
+    if (q=="q"):
+        print(f"Minimum in the given range is {str(query(tree, 0, n - 1, x, y, 0))}");
+
     elif(q=='u'):
         y+=1
         diff = arr[x]

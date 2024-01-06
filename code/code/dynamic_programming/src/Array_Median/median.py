@@ -29,14 +29,10 @@ def main():
     # Split on whitespace
     num_strings = nums_string.split()
 
-    # Make a new list of floats of all the non-whitespace values.
-    nums = [float(i) for i in num_strings if i]
-
-    # Print median
-    if not nums:
-        print("You didn't enter any numbers.")
-    else:
+    if nums := [float(i) for i in num_strings if i]:
         print(median(nums))
+    else:
+        print("You didn't enter any numbers.")
 
 
 def test_median():

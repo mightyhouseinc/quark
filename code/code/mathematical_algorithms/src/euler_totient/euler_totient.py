@@ -15,4 +15,4 @@ def phi(n):
 n = int(input())
 for i in range(1,n+1):
     ans = phi(i)
-    print("phi(" + str(i) + ") = " + str(ans))
+    print(f"phi({str(i)}) = {str(ans)}")

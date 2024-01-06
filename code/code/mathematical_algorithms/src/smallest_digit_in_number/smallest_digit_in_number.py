@@ -3,12 +3,10 @@
 def smallest_digit(n):
     min_digit=int(n%10)
 
-    while(n!=0):
-        if (min_digit>n%10):
-            min_digit=n%10
-           
+    while (n!=0):
+        min_digit = min(min_digit, n%10)
         n=int(n/10)
-        print(int (min_digit)) 
+        print(int (min_digit))
     return min_digit
 
 user_number=int(input("enter number: "))
