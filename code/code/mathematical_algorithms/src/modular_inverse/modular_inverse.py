@@ -8,20 +8,16 @@ def extendedEuclid(a, b):
 
 def modInverse(num, mod):
     if num < 1 or num >= mod:
-        raise Exception, "Number should lie between 1 and mod ({})!".format(str(mod))
+        raise (Exception, f"Number should lie between 1 and mod ({str(mod)})!")
 
-    else:
-        (d, x, y) = extendedEuclid(num, mod)
+    (d, x, y) = extendedEuclid(num, mod)
 
-        if d == 1:
-            while x < 0:
-                x += mod
-            return x
+    if d != 1:
+        raise Exception, "The number ({0}) and mod ({1}) are not coprime!".format(str(num), str(mod))
 
-        else:
-            raise Exception, "The number ({0}) and mod ({1}) are not coprime!".format(str(num), str(mod))
-
-    return -1
+    while x < 0:
+        x += mod
+    return x
 
 
 num, mod = map(int, raw_input().split())

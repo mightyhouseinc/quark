@@ -10,7 +10,7 @@ def strToNum(s):
 def numToStr(n):
     s = '%x' % n
     if len(s) % 2 != 0:
-        s = '0' + s
+        s = f'0{s}'
     return s.decode('hex')
 
 # Encrypt s using public key (e,n)

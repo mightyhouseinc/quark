@@ -1,6 +1,6 @@
 #computes the sieve for the euler totient function
 def ETF_sieve(N=1000000):
-	sieve = [i for i in range(N)]
+	sieve = list(range(N))
 
 	for i in range(2,N,1):
 		if sieve[i] == i: #this i would be a prime

@@ -46,7 +46,10 @@ class PriorityQueue(object):
             parent_item = self.data[parent_index]
             current_item = self.data[index]
 
-            if parent_index == index or not self.compareFn(current_item, parent_item) < 0:
+            if (
+                parent_index == index
+                or self.compareFn(current_item, parent_item) >= 0
+            ):
                 break
             self.data[index], self.data[parent_index] = self.data[parent_index], self.data[index]
             index = parent_index

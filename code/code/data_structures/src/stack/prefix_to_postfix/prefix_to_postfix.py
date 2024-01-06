@@ -10,14 +10,7 @@ empty = -50
 
 
 def precedence(s):
-    if s is '(':
-        return 0
-    elif s is '+' or '-':
-        return 1
-    elif s is '*' or '/' or '%':
-        return 2
-    else:
-        return 99
+    return 0 if s is '(' else 1
 
 
 def typeof(s):

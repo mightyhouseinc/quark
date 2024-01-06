@@ -2,21 +2,17 @@
 # to all the nodes such that no 2 connected nodes have the same color
 
 def isSafe(graph,m,v):  # For checking whether this node can be colored with m or not
-    for i in range(len(graph[v])):
-        if graph[v][i]==1 and col[i]==m:
-            return False
-    return True
+    return not any(graph[v][i]==1 and col[i]==m for i in range(len(graph[v])))
     
 def solve(graph,m,v):
     if v>=4:
         return True
-    else:
-        for i in range(m):
-            if isSafe(graph,i,v):
-                col[v]=i
-                if solve(graph,m,v+1):
-                    return True
-                col[v]=-1
+    for i in range(m):
+        if isSafe(graph,i,v):
+            col[v]=i
+            if solve(graph,m,v+1):
+                return True
+            col[v]=-1
     return False               
 
 # Can consider any graph

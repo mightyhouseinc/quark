@@ -28,17 +28,10 @@ MORSE_CODE_DICT = { 'A':'.-', 'B':'-...',
 
 # Function to encrypt the string according to the morse code chart
 def encrypt(message):
-    cipher = ''
-    for letter in message:
-        if letter != ' ':
-            # looks up the dictionary and adds the correspponding morse code
-            # along with a space to separate morse codes for different characters
-            cipher += MORSE_CODE_DICT[letter] + ' '
-        else:
-            # 1 space indicates different characters & 2 indicates different words
-            cipher += ' '
-
-    return cipher
+    return ''.join(
+        f'{MORSE_CODE_DICT[letter]} ' if letter != ' ' else ' '
+        for letter in message
+    )
 
 # Function to decrypt the string from morse to english
 def decrypt(message):

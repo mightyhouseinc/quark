@@ -14,7 +14,6 @@ def fibonacciEgyptian(numerator, denominator, current_fraction=[]):
         return fibonacciEgyptian(second_part.numerator,
                                  second_part.denominator,
                                  current_fraction)
-    else:
-        current_fraction.append(second_part)
-        print(current_fraction)
-        return current_fraction
+    current_fraction.append(second_part)
+    print(current_fraction)
+    return current_fraction

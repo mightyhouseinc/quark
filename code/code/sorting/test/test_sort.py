@@ -74,7 +74,7 @@ def is_same(expect, actual):
 
 
 def test_size_by_times(size, times):
-    for i in range(times):
+    for _ in range(times):
         # GIVEN
         expect = []
         fill(expect, size)

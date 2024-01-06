@@ -35,12 +35,9 @@ primes = [0]*100000
 def sieve():
 	primes[1] = 1
 	primes[2] = 2
-	j = 4
-	while(j < 100000):
+	for j in range(4, 100000, 2):
 		primes[j] = 2
-		j += 2
-	j = 3
-	while(j < 100000):
+	for j in range(3, 100000, 2):
 		if (primes[j] == 0):
 			primes[j] = j
 			i = j * j
@@ -48,7 +45,6 @@ def sieve():
 			while(i < 100000):
 				primes[i] = j
 				i += k
-		j += 2
 
 # Checks if p is prime or not.
 def rabin_miller(p):
@@ -60,7 +56,7 @@ def rabin_miller(p):
 	s = p - 1
 	while(s % 2 == 0):
 		s >>= 1
-	for i in RANGE(5):
+	for _ in RANGE(5):
 		a = random.randrange(p - 1) + 1
 		temp = s
 		mod = pow(a, temp, p)
@@ -81,16 +77,16 @@ def brent(N):
 	g, r, q = 1, 1, 1
 	while g == 1:
 		x = y
-		for i in range(r):
+		for _ in range(r):
 			y = ((y * y) % N + c) % N
 		k = 0
-		while(k < r and g == 1):
+		while (k < r and g == 1):
 			ys = y
-			for i in range(min(m, r - k)):
+			for _ in range(min(m, r - k)):
 				y = ((y * y) % N + c) % N
 				q = q * (abs(x - y)) % N
 			g = gcd(q, N)
-			k = k + m
+			k += m
 		r = r * 2
 	if g == N:
 		while True:

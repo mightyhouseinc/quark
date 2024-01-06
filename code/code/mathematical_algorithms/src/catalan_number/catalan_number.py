@@ -2,15 +2,7 @@
 
 def catalan(n):
     
-    if n <=1 :
-        return 1
- 
-   
-    res = 0
-    for i in range(n):
-        res += catalan(i) * catalan(n-i-1)
- 
-    return res
+    return 1 if n <=1 else sum(catalan(i) * catalan(n-i-1) for i in range(n))
  
 
 for i in range(10):

@@ -34,7 +34,7 @@ class checkip :
     # Check if current system is connected to IP or not
     def check_connection(self):
         if self.flag == 1:
-            exit_code = system('ping -c1 -s1 -W1 ' + self.ip_correct)
+            exit_code = system(f'ping -c1 -s1 -W1 {self.ip_correct}')
             if exit_code != 0 : 
                  print("IP ", self.ip_correct , " is not up")
             else : 

@@ -1,10 +1,11 @@
 ''' Part of Cosmos by OpenGenus Foundation '''
 
+
 from collections import deque
 
 NUM_V = 100005
-adj_list = [ [] for i in range(0, NUM_V) ]
-in_degree = [ 0 for i in range(0, NUM_V) ]
+adj_list = [[] for _ in range(0, NUM_V)]
+in_degree = [0 for _ in range(0, NUM_V)]
 
 def toposort() :
 	result = []

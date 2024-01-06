@@ -7,11 +7,11 @@
 def count_sort(arr):
 
     # The output character array that will have sorted arr
-    output = [0 for i in range(256)]
+    output = [0 for _ in range(256)]
 
     # Create a count array to store count of inidividul
     # characters and initialize count array as 0
-    count = [0 for i in range(256)]
+    count = [0 for _ in range(256)]
 
     # For storing the resulting answer since the
     # string is immutable

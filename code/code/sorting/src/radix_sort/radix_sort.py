@@ -3,9 +3,7 @@ def radix_sort(number, maxNumber):
     length = len(number)
     k = 0
     n = 1
-    temp = []
-    for i in range(length):
-        temp.append([0] * length)
+    temp = [[0] * length for _ in range(length)]
     order = [0] * length
     while n <= maxNumber:
         for i in range(length):

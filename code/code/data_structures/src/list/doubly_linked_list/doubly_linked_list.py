@@ -65,8 +65,8 @@ class DoublyLinkedList:
         if self.count == 0:
             return "..."
         cursor = self.first
-        for i in range(self.count):
-            result += "{}".format(cursor.data)
+        for _ in range(self.count):
+            result += f"{cursor.data}"
             cursor = cursor.nextNode
             if cursor is not None:
                 result += " --- "

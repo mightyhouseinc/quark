@@ -51,8 +51,8 @@ def fib_lucas_mem(n):
 # Measures the time for computing func(n) number times.
 def test_it(func, n, number=1):
     func_name = func.__name__
-    stmt = '{}({})'.format(func_name, n)
-    setup = 'from __main__ import {}'.format(func_name)
+    stmt = f'{func_name}({n})'
+    setup = f'from __main__ import {func_name}'
     print(func_name, timeit.timeit(stmt=stmt, setup=setup, number=number))
 
 if __name__ == "__main__":

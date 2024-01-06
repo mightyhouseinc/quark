@@ -12,7 +12,7 @@ def dijkstra(graph, source):
     dist[source] = 0
     Q = set(vertices)
 
-    while len(Q) > 0:
+    while Q:
         u = minimum_distance(dist, Q)
         print('Currently considering', u, 'with a distance of', dist[u])
         Q.remove(u)

@@ -41,9 +41,7 @@ class UnionFind:
             self.rank[b_root] += self.rank[a_root]
 
     def count(self, a):
-        if a not in self.parent:
-            return 0
-        return self.rank[self.root(a)]
+        return 0 if a not in self.parent else self.rank[self.root(a)]
 
 
 def main():
@@ -56,8 +54,9 @@ def main():
     union_find.union(7, 9)
     union_find.union(3, 9)
     for i in range(1, 10):
-        print("{} is in group {} with {} elements".format(
-            i, union_find.find(i), union_find.count(i)))
+        print(
+            f"{i} is in group {union_find.find(i)} with {union_find.count(i)} elements"
+        )
 
 if __name__ == "__main__":
     main()

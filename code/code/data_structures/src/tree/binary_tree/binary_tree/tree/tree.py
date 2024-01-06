@@ -55,15 +55,14 @@ class BST(object):
                         root = root.right
 
     def insert_recursive(self, root, val):
-        if root == None:
+        if root is None:
             return Node(val)
+        if val < root.data:
+            node = self.insert_recursive(root.left, val)
+            root.left = node
         else:
-            if val < root.data:
-                node = self.insert_recursive(root.left, val)
-                root.left = node
-            else:
-                node = self.insert_recursive(root.right, val)
-                root.right = node
+            node = self.insert_recursive(root.right, val)
+            root.right = node
 
     def traverse(self):  ## level order traversals
         nodes = []
@@ -80,35 +79,31 @@ class BST(object):
     def find_max(self):
         if self.root is None:
             return None
-        else:
-            current = self.root
-            while True:
-                if current.right is not None:
-                    current = current.right
-                else:
-                    break
-            return current.data
+        current = self.root
+        while True:
+            if current.right is None:
+                break
+            else:
+                current = current.right
+        return current.data
 
     def find_min(self):
         if self.root is None:
             return None
-        else:
-            current = self.root
-            while True:
-                if current.left is not None:
-                    current = current.left
-                else:
-                    break
-            return current.data
+        current = self.root
+        while True:
+            if current.left is None:
+                break
+            else:
+                current = current.left
+        return current.data
 
     def height_(self, root):  ## the height driver function
-        if root == None: return 0
-        else:
-            max_left_subtree_height = self.height_(root.left)
-            max_right_subtree_height = self.height_(root.right)
-            max_height = max(max_left_subtree_height,
-                             max_right_subtree_height) + 1
-            return max_height
+        if root is None:
+            if root == None: return 0
+        max_left_subtree_height = self.height_(root.left)
+        max_right_subtree_height = self.height_(root.right)
+        return max(max_left_subtree_height, max_right_subtree_height) + 1
 
     ## height of the first node is 0 not 1
     def height(self):
@@ -116,49 +111,43 @@ class BST(object):
         return (depth - 1)
 
     def search(self, val):
-        if self.root is None: return False
-        else:
+        if self.root is not None:
             current = self.root
             while True:
-                if val < current.data:
-                    if current.left:
-                        current = current.left
-                    else:
-                        break
+                if val < current.data and current.left:
+                    current = current.left
+                elif val < current.data or val > current.data and not current.right:
+                    break
                 elif val > current.data:
-                    if current.right:
-                        current = current.right
-                    else:
-                        break
+                    current = current.right
                 if val == current.data:
                     return True
-            return False
+        if self.root is None: return False
 
     def get_node_path(self, val):
-        if self.search(val):
-            path = []
-            current = self.root
-            while True:
-                if current is None:
-                    break
+        if not self.search(val):
+            return None
+        path = []
+        current = self.root
+        while True:
+            if current is None:
+                break
+            if val == current.data:
+                path.append(current.data)
+                break
+            elif val < current.data:
+                if current.left:
+                    path.append(current.data)
+                    current = current.left
                 else:
-                    if val == current.data:
-                        path.append(current.data)
-                        break
-                    elif val < current.data:
-                        if current.left:
-                            path.append(current.data)
-                            current = current.left
-                        else:
-                            break
-                    elif val > current.data:
-                        if current.right:
-                            path.append(current.data)
-                            current = current.right
-                        else:
-                            break
-            return path
-        return None
+                    break
+            elif val > current.data:
+                if current.right:
+                    path.append(current.data)
+                    current = current.right
+                else:
+                    break
+        return path
 
     def LCA(self, val1, val2):
         path1 = self.get_node_path(val1)
@@ -188,24 +177,23 @@ class BST(object):
     def Delete(self, root, val):  ## driver function for delettion
         if root is None:
             return None
+        if val < root.data:
+            root.left = self.Delete(root.left, val)
+        elif val > root.data:
+            root.right = self.Delete(root.right, val)
         else:
-            if val < root.data:
-                root.left = self.Delete(root.left, val)
-            elif val > root.data:
-                root.right = self.Delete(root.right, val)
+            if not root.left:
+                right = root.right
+                del root
+                return right
+            if root.right:
+                successor = self.successor(root)
+                root.data = successor.data
+                root.right = self.Delete(root.right, successor.data)
             else:
-                if not root.left:
-                    right = root.right
-                    del root
-                    return right
-                if not root.right:
-                    left = root.left
-                    del root
-                    return left
-                else:
-                    successor = self.successor(root)
-                    root.data = successor.data
-                    root.right = self.Delete(root.right, successor.data)
+                left = root.left
+                del root
+                return left
         return root
 
     def delete(self, val):

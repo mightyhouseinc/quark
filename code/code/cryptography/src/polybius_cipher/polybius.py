@@ -15,8 +15,12 @@ class PolybiusSquare(Cipher):
         self.key = ''.join([k.upper() for k in key])
         self.chars = chars or 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[:size]
         self.size = size
-        assert len(self.key)==size*size, 'invalid key in init: must have length size*size, has length '+str(len(key))
-        assert len(self.chars)==size, 'invalid chars in init: must have length=size, has length '+str(len(chars))
+        assert (
+            len(self.key) == size * size
+        ), f'invalid key in init: must have length size*size, has length {len(key)}'
+        assert (
+            len(self.chars) == size
+        ), f'invalid chars in init: must have length=size, has length {len(chars)}'
 
     def encipher_char(self,ch):
         row = (int)(self.key.index(ch) / self.size)
@@ -36,10 +40,7 @@ class PolybiusSquare(Cipher):
         :returns: The enciphered string. The ciphertext will be twice the length of the plaintext.
         """           
         string = self.remove_punctuation(string)#,filter='[^'+self.key+']')
-        ret = ''
-        for c in range(0,len(string)):
-            ret += self.encipher_char(string[c])
-        return ret    
+        return ''.join(self.encipher_char(string[c]) for c in range(0,len(string)))    
 
     def decipher(self,string):
         """Decipher string using Polybius square cipher according to initialised key.
@@ -49,10 +50,9 @@ class PolybiusSquare(Cipher):
         :returns: The deciphered string. The plaintext will be half the length of the ciphertext.
         """         
         string = self.remove_punctuation(string)#,filter='[^'+self.chars+']')
-        ret = ''
-        for i in range(0,len(string),2):
-            ret += self.decipher_pair(string[i:i+2])
-        return ret    
+        return ''.join(
+            self.decipher_pair(string[i : i + 2]) for i in range(0, len(string), 2)
+        )    
 
 if __name__ == '__main__': 
     print('use "import pycipher" to access functions')

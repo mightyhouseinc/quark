@@ -4,7 +4,7 @@ from math import factorial
 def poisson_sample(mean, n=1):
 	'Return a list containing n samples from a Poisson distribution with specified mean'
 	sample = []
-	for i in range(n):
+	for _ in range(n):
 		rand_num = random() # get a uniform random number in [0, 1)
 		count = 0
 		while rand_num > 0: # Uses the inversion method to generate values

@@ -10,10 +10,7 @@ def automorphic(num):
 	order = len(str(num))
 	square_num = num ** 2
 	str_num = str(square_num)
-	if (str_num[len(str_num)-order:]==str(num)):
-		return True
-	else:
-		return False
+	return str_num[len(str_num)-order:] == str(num)
 if __name__ == '__main__':
 	if(automorphic(138)):
 		print "Automorphic Number"

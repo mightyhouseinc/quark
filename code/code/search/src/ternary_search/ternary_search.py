@@ -12,7 +12,7 @@ def ternarySearch(arr, to_find):
             return -1
         elif to_find <= arr[temp2]:
             right = temp2
-        elif to_find > arr[temp2] and to_find <= arr[temp3]:
+        elif to_find <= arr[temp3]:
             left = temp2 + 1
             right = temp3
         else:

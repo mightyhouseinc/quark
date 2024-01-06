@@ -17,7 +17,7 @@ except NameError:
 n = int(input("Enter number of vertices of the polygon:"))
 
 for i in range(0,n):
-	X.append(float(input("X of vertex "+str(i+1)+": ")))
-	Y.append(float(input("Y of vertex "+str(i+1)+": ")))
+	X.append(float(input(f"X of vertex {str(i + 1)}: ")))
+	Y.append(float(input(f"Y of vertex {str(i + 1)}: ")))
 
-print("Area of polygon : "+str(area_of_polygon(X,Y)))
+print(f"Area of polygon : {str(area_of_polygon(X, Y))}")

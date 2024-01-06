@@ -12,12 +12,11 @@ class Node:
 # Compute the HEIGHT of a tree
 def height(node):
     if node is None:
-        return 0 ; 
-    else :
-        # Compute the height of each subtree
-        lh = height(node.left)
-        rh = height(node.right)
- 	return max(lh,rh)+1
+        return 0 ;
+    # Compute the height of each subtree
+    lh = height(node.left)
+    rh = height(node.right)
+    return max(lh,rh)+1
 
 
 root = Node(11)

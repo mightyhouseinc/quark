@@ -13,8 +13,14 @@ class MyPoint:
 
 
 def area_of_triangle(a, b, c):
-	area = .5 * abs((a.x * b.y) + (b.x * c.y) + (c.x * a.y) - (a.x * c.y) - (c.x * b.y) - (b.x * a.y))
-	return area
+	return 0.5 * abs(
+		(a.x * b.y)
+		+ (b.x * c.y)
+		+ (c.x * a.y)
+		- (a.x * c.y)
+		- (c.x * b.y)
+		- (b.x * a.y)
+	)
 
 
 def test(a, b, c):
@@ -30,6 +36,6 @@ if __name__ == '__main__':
 	pt3 = MyPoint()
 	pt1, pt2, pt3 = test(pt1, pt2, pt3)
 	tri_area = area_of_triangle(pt1, pt2, pt3)
-	print("The area of a triangle with vertices ({},{}), ({},{}) and ({},{}) is {}.".format(pt1.x, pt1.y,
-	                                                                                        pt2.x, pt2.y, pt3.x, pt3.y,
-	                                                                                        tri_area))
+	print(
+		f"The area of a triangle with vertices ({pt1.x},{pt1.y}), ({pt2.x},{pt2.y}) and ({pt3.x},{pt3.y}) is {tri_area}."
+	)

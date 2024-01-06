@@ -9,8 +9,7 @@ class Graph():
  
     def __init__(self, vertices):
         self.V = vertices
-        self.graph = [[0 for column in range(vertices)] 
-                      for row in range(vertices)]
+        self.graph = [[0 for _ in range(vertices)] for _ in range(vertices)]
  
     def printSolution(self, dist):
         print "Vertex tDistance from Source"
@@ -38,22 +37,21 @@ class Graph():
     # shortest path algorithm for a graph represented 
     # using adjacency matrix representation
     def dijkstra(self, src):
- 
+     
         dist = [sys.maxint] * self.V
         dist[src] = 0
         sptSet = [False] * self.V
- 
-        for cout in range(self.V):
- 
+
+        for _ in range(self.V):
             # Pick the minimum distance vertex from 
             # the set of vertices not yet processed. 
             # u is always equal to src in first iteration
             u = self.minDistance(dist, sptSet)
- 
+
             # Put the minimum distance vertex in the 
             # shotest path tree
             sptSet[u] = True
- 
+
             # Update dist value of the adjacent vertices 
             # of the picked vertex only if the current 
             # distance is greater than new distance and
@@ -62,7 +60,7 @@ class Graph():
                 if self.graph[u][v] > 0 and sptSet[v] == False and
                    dist[v] > dist[u] + self.graph[u][v]:
                         dist[v] = dist[u] + self.graph[u][v]
- 
+
         self.printSolution(dist)
  
 # Driver program

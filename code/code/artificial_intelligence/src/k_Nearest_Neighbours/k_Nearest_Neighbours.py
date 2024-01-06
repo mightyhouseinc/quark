@@ -20,9 +20,7 @@ def loadDataset(filename, split, trainingSet=[], testSet=[]):
 
 
 def euclideanDistance(instance1, instance2, length):
-    distance = 0
-    for x in range(length):
-        distance += pow((instance1[x] - instance2[x]), 2)
+    distance = sum(pow((instance1[x] - instance2[x]), 2) for x in range(length))
     return math.sqrt(distance)
 
 
@@ -33,10 +31,7 @@ def getNeighbors(trainingSet, testInstance, k):
         dist = euclideanDistance(testInstance, trainingSet[x], length)
         distances.append((trainingSet[x], dist))
     distances.sort(key=operator.itemgetter(1))
-    neighbors = []
-    for x in range(k):
-        neighbors.append(distances[x][0])
-    return neighbors
+    return [distances[x][0] for x in range(k)]
 
 
 def getResponse(neighbors):
@@ -53,10 +48,9 @@ def getResponse(neighbors):
 
 
 def getAccuracy(testSet, predictions):
-    correct = 0
-    for x in range(len(testSet)):
-        if testSet[x][-1] == predictions[x]:
-            correct += 1
+    correct = sum(
+        1 for x in range(len(testSet)) if testSet[x][-1] == predictions[x]
+    )
     return (correct / float(len(testSet))) * 100.0
 
 

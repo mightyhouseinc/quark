@@ -25,15 +25,15 @@ class TreeNode(object):
 #The function diameter_height returns the diameter and the height of the tree.
 #And the function find_tree_diameter uses it to just compute the diameter (by discarding the height).
 class Solution():
-    def diameter_height(node):
-        if node is None:
+    def diameter_height(self):
+        if self is None:
             return 0, 0
-        ld, lh = diameter_height(node.left)
-        rd, rh = diameter_height(node.right)
+        ld, lh = diameter_height(self.left)
+        rd, rh = diameter_height(self.right)
         return max(lh + rh + 1, ld, rd), 1 + max(lh, rh)
 
-    def find_tree_diameter(node):
-        d, _ = diameter_height(node)
+    def find_tree_diameter(self):
+        d, _ = diameter_height(self)
         return d
 
 diameter = Solution()

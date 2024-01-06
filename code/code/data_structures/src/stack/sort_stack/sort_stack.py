@@ -2,20 +2,16 @@
 class stack():
     def __init__(self):
         self.__stack = []
-        pass
 
     # method to parse_stack if have already
     def parse_stack(self, stack):
         self.__stack = stack
-        pass
 
     def push(self, value):
         self.__stack.append(value)
-        pass
 
     def pop(self):
         self.__stack.pop()
-        pass
 
     def get_elements(self):
         return self.__stack

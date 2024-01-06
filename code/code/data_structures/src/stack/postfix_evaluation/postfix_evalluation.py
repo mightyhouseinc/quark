@@ -5,7 +5,6 @@ class postfix():
     def __init__(self, verbose = False):
         self._stack = []
         self._verbose = verbose
-        pass
 
     def evaluate(self, post_fix_string):
         if self._verbose:
@@ -21,41 +20,46 @@ class postfix():
 
         if self._verbose:
             print("[!] Answer is : ", self._stack[0])
-            return self._stack[0]
-        else:
-            return self._stack[0]
+        return self._stack[0]
 
     def _act(self, operand):
         b = self._stack.pop()
         a = self._stack.pop()
 
         if self._verbose:
-            print("[!] Popped last two values from stack, a = {} and b = {} -> ".format(a,b), self._stack)
+            print(
+                f"[!] Popped last two values from stack, a = {a} and b = {b} -> ",
+                self._stack,
+            )
 
         if operand == "+":
             self._stack.append(a + b)
             if self._verbose:
-                print("[!] Performed {} + {} and Pushed in stack -> ".format(a,b), self._stack)
+                print(f"[!] Performed {a} + {b} and Pushed in stack -> ", self._stack)
         elif operand == "/":
             try:
                 self._stack.append(a // b)
                 if self._verbose:
-                    print("[!] Performed {} // (integer division) {} and Pushed in stack -> ".format(a,b), self._stack)
+                    print(
+                        f"[!] Performed {a} // (integer division) {b} and Pushed in stack -> ",
+                        self._stack,
+                    )
             except ZeroDivisionError:
                 if self._verbose:
-                    print("[x] Error : Divide By Zero at a = {} and b = {} with current stack state -> ".format(a,b), self._stack)
+                    print(
+                        f"[x] Error : Divide By Zero at a = {a} and b = {b} with current stack state -> ",
+                        self._stack,
+                    )
                 sys.exit(1)
 
         elif operand == "-":
             self._stack.append(a - b)
             if self._verbose:
-                print("[!] Performed {} - {} and Pushed in stack -> ".format(a,b), self._stack)
+                print(f"[!] Performed {a} - {b} and Pushed in stack -> ", self._stack)
         elif operand == "*":
             self._stack.append(a * b)
             if self._verbose:
-                print("[!] Performed {} * {} and Pushed in stack -> ".format(a,b), self._stack)
-
-        pass
+                print(f"[!] Performed {a} * {b} and Pushed in stack -> ", self._stack)
     pass
 
 p_fix1 = postfix()

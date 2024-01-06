@@ -169,9 +169,9 @@ def compute_eigen(scatter_matrix, cov_mat):
         # assert if the scatter_matrix and covariance matrix eigen vectors are identical
         assert eigvec_sc.all() == eigvec_cov.all(), 'Eigenvectors are not identical'
 
-        print('Eigenvector {}: \n{}'.format(i+1, eigvec_sc))
-        print('Eigenvalue {} from scatter matrix: {}'.format(i+1, eig_val_sc[i]))
-        print('Eigenvalue {} from covariance matrix: {}'.format(i+1, eig_val_cov[i]))
+        print(f'Eigenvector {i + 1}: \n{eigvec_sc}')
+        print(f'Eigenvalue {i + 1} from scatter matrix: {eig_val_sc[i]}')
+        print(f'Eigenvalue {i + 1} from covariance matrix: {eig_val_cov[i]}')
         print('Scaling factor: ', eig_val_sc[i]/eig_val_cov[i])
         print(40 * '-')
 

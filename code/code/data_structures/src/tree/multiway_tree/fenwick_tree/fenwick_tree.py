@@ -15,7 +15,7 @@ index i in the bit[] array stores the cumulative sum from the index i to i - (1<
 class FenwickTree:
     # To intialize list of num_of_elements+1 size
     def initialize(self, num_of_elements):
-        for i in range(num_of_elements + 1):
+        for _ in range(num_of_elements + 1):
             array.append(0)
             bit.append(0)
 
@@ -47,7 +47,7 @@ for i in range(num_of_elements):
 
 number_of_queries = int(input("Enter number of queries: "))
 
-for i in range(number_of_queries):
+for _ in range(number_of_queries):
     left_index = int(input("Enter left index (1 indexing): "))
     right_index = int(input("Enter right index (1 indexing): "))
     if right_index < left_index:

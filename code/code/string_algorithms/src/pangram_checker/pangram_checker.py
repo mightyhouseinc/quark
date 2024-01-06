@@ -14,11 +14,4 @@ def pangram_checker(text):
             c = ord(c) - ord('a')
             arr[c] = True
 
-    # Checking if arr is all true value
-
-    for index in arr:
-        if not index:
-            return False
-
-
-    return True
+    return all(arr)

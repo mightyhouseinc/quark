@@ -15,15 +15,13 @@ class FCFS():
         )  # self.__wtl() returns a list of waiting_time
         self.__taList = self.__tal(
         )  # self.__tal() returns a list of turn_arround_time
-        pass
 
     # Print() prints details about the processes
     def Print(self):
-        l = 0  # local variable used to print elements in list
         print(
             "FORMAT : process_name -> arrival_time -> burst_time -> waiting_time -> turn_arround_time\n"
         )
-        for process in self.__processes:
+        for l, process in enumerate(self.__processes):
             print(
                 process,
                 self.__processes[process][0],
@@ -31,24 +29,18 @@ class FCFS():
                 self.__wtList[l],
                 self.__taList[l],
                 sep=" -> ")
-            l += 1  # incrementing the list
-            pass
-        pass
 
     # Print_Chat() prints the gantt chart for the FCFS
     def Print_Chat(self):
         for process in self.__processes:  # creating line | separates the process and = indicates the burst_time
             print("=" * self.__processes[process][1], "|", end="", sep="")
-            pass
         print()
         temp = 0
         # printing the waiting_time
         for process in self.__processes:
             temp += self.__processes[process][1]
             print(" " * self.__processes[process][1], temp, end="", sep="")
-            pass
         print("\n")
-        pass
 
     # Method that returns the average waiting_time upto 3 decimal places
     def get_avg_wt(self):
@@ -62,26 +54,20 @@ class FCFS():
     def __wtl(self):
         temp = []
         for x in self.__processes:
-            if len(temp) == 0:
+            if not temp:
                 temp.append(0)
-                pass
             else:
                 temp.append(temp[-1] + self.__processes[x][1])
-                pass
-            pass
         return temp
 
     # Private method to build a list of turn_arround_time
     def __tal(self):
         temp = []
         for x in self.__processes:
-            if len(temp) == 0:
+            if not temp:
                 temp.append(self.__processes[x][1])
-                pass
             else:
                 temp.append(temp[-1] + self.__processes[x][1])
-                pass
-            pass
         return temp
 
     pass

@@ -8,8 +8,7 @@ from csv import reader
 def load_csv(filename):
     file = open(filename, "rb")
     lines = reader(file)
-    dataset = list(lines)
-    return dataset
+    return list(lines)
 
 
 # Convert string column to float
@@ -20,11 +19,11 @@ def str_column_to_float(dataset, column):
 
 # Split a dataset into k folds
 def cross_validation_split(dataset, n_folds):
-    dataset_split = list()
+    dataset_split = []
     dataset_copy = list(dataset)
     fold_size = int(len(dataset) / n_folds)
-    for i in range(n_folds):
-        fold = list()
+    for _ in range(n_folds):
+        fold = []
         while len(fold) < fold_size:
             index = randrange(len(dataset_copy))
             fold.append(dataset_copy.pop(index))
@@ -34,22 +33,19 @@ def cross_validation_split(dataset, n_folds):
 
 # Calculate accuracy percentage
 def accuracy_metric(actual, predicted):
-    correct = 0
-    for i in range(len(actual)):
-        if actual[i] == predicted[i]:
-            correct += 1
+    correct = sum(1 for i in range(len(actual)) if actual[i] == predicted[i])
     return correct / float(len(actual)) * 100.0
 
 
 # Evaluate an algorithm using a cross validation split
 def evaluate_algorithm(dataset, algorithm, n_folds, *args):
     folds = cross_validation_split(dataset, n_folds)
-    scores = list()
+    scores = []
     for fold in folds:
         train_set = list(folds)
         train_set.remove(fold)
         train_set = sum(train_set, [])
-        test_set = list()
+        test_set = []
         for row in fold:
             row_copy = list(row)
             test_set.append(row_copy)
@@ -63,7 +59,7 @@ def evaluate_algorithm(dataset, algorithm, n_folds, *args):
 
 # Split a dataset based on an attribute and an attribute value
 def test_split(index, value, dataset):
-    left, right = list(), list()
+    left, right = [], []
     for row in dataset:
         if row[index] < value:
             left.append(row)
@@ -75,7 +71,7 @@ def test_split(index, value, dataset):
 # Calculate the Gini index for a split dataset
 def gini_index(groups, classes):
     # count all samples at split point
-    n_instances = float(sum([len(group) for group in groups]))
+    n_instances = float(sum(len(group) for group in groups))
     # sum weighted Gini index for each group
     gini = 0.0
     for group in groups:
@@ -95,7 +91,7 @@ def gini_index(groups, classes):
 
 # Select the best split point for a dataset
 def get_split(dataset):
-    class_values = list(set(row[-1] for row in dataset))
+    class_values = list({row[-1] for row in dataset})
     b_index, b_value, b_score, b_groups = 999, 999, 999, None
     for index in range(len(dataset[0]) - 1):
         for row in dataset:
@@ -149,21 +145,21 @@ def build_tree(train, max_depth, min_size):
 # Make a prediction with a decision tree
 def predict(node, row):
     if row[node['index']] < node['value']:
-        if isinstance(node['left'], dict):
-            return predict(node['left'], row)
-        else:
-            return node['left']
+        return (
+            predict(node['left'], row)
+            if isinstance(node['left'], dict)
+            else node['left']
+        )
+    if isinstance(node['right'], dict):
+        return predict(node['right'], row)
     else:
-        if isinstance(node['right'], dict):
-            return predict(node['right'], row)
-        else:
-            return node['right']
+        return node['right']
 
 
 # Classification and Regression Tree Algorithm
 def decision_tree(train, test, max_depth, min_size):
     tree = build_tree(train, max_depth, min_size)
-    predictions = list()
+    predictions = []
     for row in test:
         prediction = predict(tree, row)
         predictions.append(prediction)
@@ -184,7 +180,7 @@ max_depth = 5
 min_size = 10
 scores = evaluate_algorithm(dataset, decision_tree, n_folds, max_depth,
                             min_size)
-print('Scores: %s' % scores)
+print(f'Scores: {scores}')
 print('Mean Accuracy: %.3f%%' % (sum(scores) / float(len(scores))))
 
 # Evaluate algorithm by computing ROC (Receiver Operating Characteristic) and AUC (area the curve)
@@ -201,4 +197,4 @@ plt.title('Receiver operating characteristic example')
 plt.ylabel('True Positive Rate')
 plt.xlabel('False Positive Rate')
 plt.show()
-print('AUC: %s' % roc_auc)
+print(f'AUC: {roc_auc}')

@@ -34,7 +34,7 @@ def random_char():
   Return a random character between ASCII 32 and 126 (i.e. spaces, symbols,
   letters, and digits). All characters returned will be nicely printable.
   """
-  return chr(int(random.randrange(32, 126, 1)))
+  return chr(random.randrange(32, 126, 1))
 
 def random_population():
   """
@@ -42,10 +42,8 @@ def random_population():
   DNA_SIZE times to generate a string of random characters with random_char().
   """
   pop = []
-  for i in xrange(POP_SIZE):
-    dna = ""
-    for c in xrange(DNA_SIZE):
-      dna += random_char()
+  for _ in xrange(POP_SIZE):
+    dna = "".join(random_char() for _ in xrange(DNA_SIZE))
     pop.append(dna)
   return pop
 
@@ -60,10 +58,7 @@ def fitness(dna):
   it and the character in the same position in the OPTIMAL string. These values
   are summed and then returned.
   """
-  fitness = 0
-  for c in xrange(DNA_SIZE):
-    fitness += abs(ord(dna[c]) - ord(OPTIMAL[c]))
-  return fitness
+  return sum(abs(ord(dna[c]) - ord(OPTIMAL[c])) for c in xrange(DNA_SIZE))
 
 def mutate(dna):
   """

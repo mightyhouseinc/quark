@@ -17,17 +17,14 @@ def findSmallerInRight(st, low, high) :
   
     return countRight
      
-def findRank (st) :
+def findRank(st):
     ln = len(st)
     mul = fact(ln)
     rank = 1
-    i = 0
-  
-    while i < ln :
+    for i in range(ln):
         mul = mul / (ln - i)
         countRight = findSmallerInRight(st, i, ln-1)
         rank = rank + countRight * mul
-        i = i + 1
     return rank
      
      

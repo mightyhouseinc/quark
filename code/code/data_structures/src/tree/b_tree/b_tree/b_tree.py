@@ -36,18 +36,17 @@ class BTree(object):
         x : (optional) Node at which to begin search. Can be None, in which case the entire tree is searched.
         
         """
-        if isinstance(x, BTreeNode):
-            i = 0
-            while i < len(x.keys) and k > x.keys[i]:  # look for index of k
-                i += 1
-            if i < len(x.keys) and k == x.keys[i]:  # found exact match
-                return (x, i)
-            elif x.leaf:  # no match in keys, and is leaf ==> no match exists
-                return None
-            else:  # search children
-                return self.search(k, x.c[i])
-        else:  # no node provided, search root of tree
+        if not isinstance(x, BTreeNode):
             return self.search(k, self.root)
+        i = 0
+        while i < len(x.keys) and k > x.keys[i]:  # look for index of k
+            i += 1
+        if i < len(x.keys) and k == x.keys[i]:  # found exact match
+            return (x, i)
+        elif x.leaf:  # no match in keys, and is leaf ==> no match exists
+            return None
+        else:  # search children
+            return self.search(k, x.c[i])
 
     def insert(self, k):
         r = self.root
@@ -92,12 +91,12 @@ class BTree(object):
         # keys of z are t to 2t - 1,
         # y is then 0 to t-2
         z.keys = y.keys[t:(2 * t - 1)]
-        y.keys = y.keys[0:(t - 1)]
+        y.keys = y.keys[:t - 1]
 
         # children of z are t to 2t els of y.c
         if not y.leaf:
             z.c = y.c[t:(2 * t)]
-            y.c = y.c[0:(t - 1)]
+            y.c = y.c[:t - 1]
 
     def __str__(self):
         r = self.root

@@ -5,10 +5,7 @@ import copy
 # returns the longest increasing sequence
 def longest_increasing_seq(numbers):
     # longest increasing subsequence
-    lis = []
-    # base case
-    lis.append([numbers[0]])
-
+    lis = [[numbers[0]]]
     # start filling using dp - forwards
 
     for i in xrange(1, len(numbers)):

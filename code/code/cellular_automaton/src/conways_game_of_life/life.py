@@ -37,10 +37,7 @@ class Game:
 		root.after(500,self.run)
 
 	def validButton(self,i,j):
-		if i<0 or j<0 or j>19 or i> 19:
-			return False
-		else:
-			return True
+		return i >= 0 and j >= 0 and j <= 19 and i <= 19
 
 def main():
     global root

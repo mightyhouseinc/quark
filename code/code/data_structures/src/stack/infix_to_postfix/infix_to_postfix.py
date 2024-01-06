@@ -20,13 +20,7 @@ class Stack:
 
 
 def infix_to_postfix(exp):
-    prec = {}
-    prec["*"]=3
-    prec["/"]=3
-    prec["+"]=2
-    prec["-"]=2
-    prec["("]=1
-
+    prec = {"*": 3, "/": 3, "+": 2, "-": 2, "(": 1}
     s=Stack()
     postfix_list=[]
     token_list=exp.split()

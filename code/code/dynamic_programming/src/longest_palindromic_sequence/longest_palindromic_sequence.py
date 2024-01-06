@@ -24,12 +24,7 @@ def longest_palindrome(text):
             tmp = palindromes_lengths[rgap]
             if text[fgap] == text[rgap]:
                 # if equal characters, update palindromes_lengths
-                if rgap + 1 > fgap - 1:
-                    # if characters are neighbors, palindromes_lengths is 2
-                    palindromes_lengths[rgap] = 2
-                else:
-                    # else they're added to the pre-calculated length
-                    palindromes_lengths[rgap] = 2 + pre
+                palindromes_lengths[rgap] = 2 if rgap + 1 > fgap - 1 else 2 + pre
             else:
                 # if first and last characters do not match, try the latter ones
                 palindromes_lengths[rgap] = max(palindromes_lengths[rgap + 1],

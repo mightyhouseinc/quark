@@ -22,9 +22,7 @@ class HeapNode:
 	def __eq__(self, other):
 		if(other == None):
 			return False
-		if(not isinstance(other, HeapNode)):
-			return False
-		return self.freq == other.freq
+		return False if (not isinstance(other, HeapNode)) else self.freq == other.freq
 
 
 class HuffmanCoding:
@@ -39,7 +37,7 @@ class HuffmanCoding:
 	def make_frequency_dict(self, text):
 		frequency = {}
 		for character in text:
-			if not character in frequency:
+			if character not in frequency:
 				frequency[character] = 0
 			frequency[character] += 1
 		return frequency
@@ -62,7 +60,7 @@ class HuffmanCoding:
 
 
 	def make_codes_helper(self, root, current_code):
-		if(root == None):
+		if root is None:
 			return
 
 		if(root.char != None):
@@ -70,8 +68,8 @@ class HuffmanCoding:
 			self.reverse_mapping[current_code] = root.char
 			return
 
-		self.make_codes_helper(root.left, current_code + "0")
-		self.make_codes_helper(root.right, current_code + "1")
+		self.make_codes_helper(root.left, f"{current_code}0")
+		self.make_codes_helper(root.right, f"{current_code}1")
 
 
 	def make_codes(self):
@@ -81,15 +79,12 @@ class HuffmanCoding:
 
 
 	def get_encoded_text(self, text):
-		encoded_text = ""
-		for character in text:
-			encoded_text += self.codes[character]
-		return encoded_text
+		return "".join(self.codes[character] for character in text)
 
 
 	def pad_encoded_text(self, encoded_text):
 		extra_padding = 8 - len(encoded_text) % 8
-		for i in range(extra_padding):
+		for _ in range(extra_padding):
 			encoded_text += "0"
 
 		padded_info = "{0:08b}".format(extra_padding)
@@ -111,7 +106,7 @@ class HuffmanCoding:
 
 	def compress(self):
 		filename, file_extension = os.path.splitext(self.path)
-		output_path = filename + ".bin"
+		output_path = f"{filename}.bin"
 
 		with open(self.path, 'r+') as file, open(output_path, 'wb') as output:
 			text = file.read()
@@ -139,10 +134,8 @@ class HuffmanCoding:
 		padded_info = padded_encoded_text[:8]
 		extra_padding = int(padded_info, 2)
 
-		padded_encoded_text = padded_encoded_text[8:] 
-		encoded_text = padded_encoded_text[:-1*extra_padding]
-
-		return encoded_text
+		padded_encoded_text = padded_encoded_text[8:]
+		return padded_encoded_text[:-1*extra_padding]
 
 	def decode_text(self, encoded_text):
 		current_code = ""
@@ -160,7 +153,7 @@ class HuffmanCoding:
 
 	def decompress(self, input_path):
 		filename, file_extension = os.path.splitext(self.path)
-		output_path = filename + "_decompressed" + ".txt"
+		output_path = f"{filename}_decompressed.txt"
 
 		with open(input_path, 'rb') as file, open(output_path, 'w') as output:
 			bit_string = ""
@@ -175,7 +168,7 @@ class HuffmanCoding:
 			encoded_text = self.remove_padding(bit_string)
 
 			decompressed_text = self.decode_text(encoded_text)
-			
+
 			output.write(decompressed_text)
 
 		print("Decompressed")

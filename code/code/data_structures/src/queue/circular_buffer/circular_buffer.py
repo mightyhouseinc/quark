@@ -12,10 +12,10 @@ class CircularBuffer:
 		self.__idx = (self.__idx + 1) % self. __size
 
 	def get_ordered(self):
-		retarr = []
-		for i in range(0, self.__size):
-			retarr += [self.__array[(i + self.__idx) % self.__size]]
-		return retarr
+		return [
+			self.__array[(i + self.__idx) % self.__size]
+			for i in range(0, self.__size)
+		]
 
 buf = CircularBuffer(2)
 

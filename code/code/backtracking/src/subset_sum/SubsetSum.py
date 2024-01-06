@@ -18,7 +18,7 @@ def subsetsum(cs,k,r,x,w,d):
 #driver for the above code
 #Main array w 
 w=[2,3,4,5,0]
-x=[0 for i in range(len(w))]
+x = [0 for _ in range(len(w))]
 print("Enter the no u want to get the subsets sum for")
 num=int(input())
 if num<=sum(w):

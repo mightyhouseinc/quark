@@ -26,11 +26,7 @@ def isAnagram(string1, string2):
     allChars = set(charCount1.keys())
     allChars = allChars.union(charCount2.keys())
 
-    for c in allChars:
-        if (charCount1[c] != charCount2[c]):
-            return False
-
-    return True
+    return all(charCount1[c] == charCount2[c] for c in allChars)
 
 
 

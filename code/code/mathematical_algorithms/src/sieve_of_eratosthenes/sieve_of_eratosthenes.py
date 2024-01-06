@@ -15,4 +15,4 @@ except:
     sys.exit()
 
 print(primes[0])
-print("\nComputations {}".format(primes[1]))
+print(f"\nComputations {primes[1]}")

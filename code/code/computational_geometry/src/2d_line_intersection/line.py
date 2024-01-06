@@ -1,10 +1,7 @@
 # computational geometry | 2D line intersecton | Python
 def parallel_int(verticeX,verticeY):
 	k = (verticeY[2]-verticeY[0])*(verticeX[1]-verticeX[0]) - (verticeX[2]-verticeX[0])*(verticeY[1]-verticeY[0])
-	if k==0:
-		return "infinite"
-	else:
-		return "no"
+	return "infinite" if k==0 else "no"
 def line_int(verticeX,verticeY):
 	x12 = verticeX[0]-verticeX[1]
 	x34 = verticeX[2]-verticeX[3]
@@ -24,8 +21,6 @@ def line_int(verticeX,verticeY):
 
 	return (x,y)
 
-X=[]
-Y=[]
 try:
 	input = raw_input
 except NameError:
@@ -33,9 +28,8 @@ except NameError:
 
 print("Enter 2-point form of each line")
 
-X.append(float(input("X of point 1, line 1: ")))
-Y.append(float(input("Y of point 1, line 1: ")))
-
+X = [float(input("X of point 1, line 1: "))]
+Y = [float(input("Y of point 1, line 1: "))]
 X.append(float(input("X of point 2, line 1: ")))
 Y.append(float(input("Y of point 2, line 1: ")))
 
@@ -47,6 +41,6 @@ Y.append(float(input("Y of point 2, line 2: ")))
 
 intersectn = line_int(X,Y)
 if intersectn[0]=="NoInt":
-	print("Parallel lines found with "+parallel_int(X,Y)+" intersections")
+	print(f"Parallel lines found with {parallel_int(X, Y)} intersections")
 else:
-	print("Point of intersection : (" + str(intersectn[0]) + ", " + str(intersectn[1]) + ")")
+	print(f"Point of intersection : ({str(intersectn[0])}, {str(intersectn[1])})")

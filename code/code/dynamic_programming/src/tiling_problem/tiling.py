@@ -1,5 +1,5 @@
 def tiling(n):
-    tile = [0 for i in range(n+1)]
+    tile = [0 for _ in range(n+1)]
 
     tile[0] = 1
     tile[1] = 1

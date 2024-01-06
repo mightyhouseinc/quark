@@ -5,10 +5,10 @@ def minCost(costMatrix, m, n, traceback=True):
     from (0, 0).
     """
 
-    tc = [[0 for x in range(m + 1)] for y in range(n + 1)]
-    
+    tc = [[0 for _ in range(m + 1)] for _ in range(n + 1)]
+
     tc[0][0] = costMatrix[0][0]
-    
+
     # Initialize first column of total cost array
     for i in range(1, m + 1):
         tc[i][0] = tc[i - 1][0] + costMatrix[i][0]
